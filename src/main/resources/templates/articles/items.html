@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+
+<body>
+<!-- List of Articles -->
+<div>
+  <div style="display: flex; align-items: center; margin-bottom: 0;">
+    <div style="text-align: center; width: 5%;">
+      <p style="margin-bottom: 0;"><b>번호</b></p>
+    </div>
+    <div style="text-align: center; width: 30%;">
+      <p style="margin-bottom: 0;"><b>제목</b></p>
+    </div>
+  </div>
+  <hr class="light-divider">
+  <div>
+    <ul style="list-style-type: none; padding: 0;">
+      <li th:each="item : ${articleList}">
+        <div style="display: flex; align-items: center;">
+          <div style="text-align: center; width: 5%;">
+            <span th:text="${item.id}" style="margin-bottom: 0;"></span>
+          </div>
+          <div style="text-align: center; width: 20%;">
+            <a th:href="@{/articles/{id}(id=${item.id})}"
+               th:text="${item.title}"
+               style="color: black; text-decoration: none;"></a>
+          </div>
+        </div>
+        <hr class="light-divider">
+      </li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

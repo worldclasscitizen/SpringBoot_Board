@@ -1,0 +1,71 @@
+/* styles.css */
+
+/* 시그니처 색상의 구분선 */
+.custom-hr {
+    height: 2px;
+    background-color: #1FA877;
+    margin-bottom: 20px;
+    opacity: 1;
+}
+
+/* 연한 회색 구분선 */
+.light-divider {
+    border: 0.7px solid #d3d3d3;
+    margin: 8px 0;
+}
+
+/* 추천/비추천 아이콘을 감싸기 위한 동그라미 */
+.circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 auto;
+    border: 2px solid transparent;
+    transition: border-color 0.3s;
+}
+
+/* 추천 아이콘의 동그라미 = 파란색 */
+.circle.text-primary {
+    background-color: #007bff; /* 파란색 배경 */
+    border-color: #007bff; /* 파란색 테두리 */
+}
+
+/* 비추천 아이콘의 동그라미 = 빨간색 */
+.circle.text-danger {
+    background-color: #dc3545; /* 빨간색 배경 */
+    border-color: #dc3545; /* 빨간색 테두리 */
+}
+
+/* 추천/비추천 아이콘 색상 = 흰색 */
+.circle .fa-thumbs-up,
+.circle .fa-thumbs-down {
+    color: white;
+}
+
+/* 추천/비추천 아이콘을 담기 위한 박스는 회색의 각진 네모 */
+.border-box {
+    border: 1.5px solid #ccc;
+    padding: 10px 20px; /* 위 여백 10px, 아래 여백 20px */
+    border-radius: 0;
+    display: inline-block; /* 콘텐츠 크기에 맞게 너비 조정 */
+}
+
+.comment-item {
+    margin-bottom: 10px; /* 각 댓글 간의 간격 조정 */
+    display: flex; /* Flexbox 사용 */
+    align-items: center; /* 세로 중앙 정렬 */
+}
+
+.nickname {
+    margin-right: 20px; /* 닉네임과 댓글 사이의 간격 조정 (탭 두 개 정도) */
+    flex-shrink: 0; /* 닉네임이 줄어들지 않도록 설정 */
+    font-weight: bold; /* 닉네임을 굵게 설정 */
+}
+
+.comment-body {
+    flex-grow: 1; /* 댓글이 남은 공간을 차지하도록 설정 */
+    text-align: left; /* 왼쪽 정렬 (필요에 따라 수정 가능) */
+}
