@@ -27,8 +27,6 @@
 
       <form class="container" th:action="@{/articles/{id}(id=${article.id})}" method="post">
         <input type="hidden" name="_method" value="patch"/>
-        <!-- Sending CSRF Token -->
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <input type="hidden" name="id" th:value="${article.id}"/>
         <!-- Edit Article Title -->
         <p><b>제목 수정</b></p>

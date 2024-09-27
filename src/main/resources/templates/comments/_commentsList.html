@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -16,12 +18,54 @@
     </div>
 
     <!-- Comments List -->
-    <div th:each="comment : ${commentDtos}" class="comment-item d-flex" style="display: flex; align-items: center; margin-bottom: 0px;">
+    <div th:each="comment, iterStat : ${commentDtos}" class="comment-item d-flex" style="display: flex; align-items: center; margin-bottom: 0px;">
       <p class="nickname" th:text="${comment.nickname}" style="width: 150px; text-align: left; margin-right: 10px;">댓글 작성자</p>
       <p class="comment-body" th:text="${comment.body}" style="flex-grow: 1; text-align: left;">댓글 내용</p>
-    </div>
 
+      <!-- Bootstrap's Dropdown -->
+      <div class="dropdown" style="position: relative; align-self: flex-start; margin-right: 1.5%; margin-top: -10px;">
+        <button class="btn btn-link" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                aria-expanded="false" style="padding: 0; text-decoration: none;">
+          &#x22EE; <!-- 세로 점 세 개 아이콘 -->
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="min-width: auto;">
+          <li><button class="dropdown-item" type="button" id="comment-update-btn"
+                      th:data-comment-id="${comment.id}" th:data-comment-article-id="${comment.articleId}"
+                      th:data-comment-nickname="${comment.nickname}" th:data-comment-body="${comment.body}">수정</button></li>
+          <li><button class="dropdown-item" type="button" id="comment-delete-btn" th:data-comment-id="${comment.id}">삭제</button></li>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
+
+<!-- Bootstrap JS and Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+<script>
+{
+  // Update Comment
+
+  // Delete Comment
+  const commentDeleteBtn = document.querySelector("#comment-delete-btn");
+
+  commentDeleteBtn.addEventListener("click", (event) => {
+    const commentId = commentDeleteBtn.getAttribute("data-comment-id");
+    console.log(commentId);
+    const url = `/comments/${commentId}`;
+    fetch(url, {
+      method: "DELETE",
+    }).then(response => {
+      if(!response.ok) {
+        alert("댓글 삭제 실패.");
+        return;
+      }
+      alert("댓글 삭제 성공.");
+      window.location.reload();
+    });
+  });
+}
+</script>
 </body>
 </html>

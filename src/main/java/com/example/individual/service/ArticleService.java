@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static org.hibernate.query.sqm.tree.SqmNode.log;
-
 @Service
 @Slf4j
 public class ArticleService {
@@ -44,7 +42,6 @@ public class ArticleService {
     public Article updateArticle(Long id, ArticleDto dto) {
         Article article = dto.toEntity();
         Article target = articleRepository.findById(id).orElse(null);
-        log.info("dto = " + dto);
         if(target == null || id != article.getId()) { return null; }
         target.patch(article);
         return articleRepository.save(target);

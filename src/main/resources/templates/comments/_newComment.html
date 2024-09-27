@@ -10,17 +10,47 @@
 <!-- 새 댓글 작성 -->
 <div class="row mt-4">
   <div class="col">
-    <form th:action="@{/articles/{id}/comments(id=${article.id})}" method="post">
+    <form>
+      <input type="hidden" id="new-comment-article-id" th:value="${article.id}"/>
+      <input type="text" style="margin-left: 1.5%; margin-bottom: 5px;" id="new-comment-nickname"
+             maxlength="10" placeholder="닉네임을 입력하세요"/>
       <div class="form-group">
-        <textarea class="form-control" name="content" rows="3" placeholder="댓글을 입력하세요"
+        <textarea class="form-control" name="content" id="new-comment-body" rows="3" placeholder="댓글을 입력하세요"
                   style="width: 97%; margin: 0 auto;"></textarea>
       </div>
       <div class="d-flex justify-content-end mt-2" style="margin-right: 1.5%;">
-        <button type="submit" class="btn" style="color: white; background-color: #1FA877;">등록</button>
+        <button type="button" class="btn" id="comment-create-btn" style="color: white; background-color: #1FA877;">등록</button>
       </div>
     </form>
   </div>
 </div>
 <hr class="custom-hr" style="margin-bottom: 10px;">
+
+<script>
+  const commentCreateBtn = document.querySelector("#comment-create-btn");
+
+  commentCreateBtn.addEventListener("click", function() {
+    const comment = {
+      articleId: document.querySelector("#new-comment-article-id").value,
+      nickname: document.querySelector("#new-comment-nickname").value,
+      body: document.querySelector("#new-comment-body").value
+    };
+    console.log(comment);
+    const url = "/articles/" + comment.articleId + "/comments";
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(comment)
+    }).then(response => {
+      const msg = (response.ok) ? "댓글 등록 성공" : "댓글 등록 실패";
+      alert(msg);
+
+      window.location.reload();
+    });
+  });
+
+</script>
 </body>
 </html>
