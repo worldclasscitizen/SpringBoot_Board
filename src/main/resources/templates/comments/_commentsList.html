@@ -48,21 +48,23 @@
   // Update Comment
 
   // Delete Comment
-  const commentDeleteBtn = document.querySelector("#comment-delete-btn");
+  const commentDeleteBtns = document.querySelectorAll("#comment-delete-btn");
 
-  commentDeleteBtn.addEventListener("click", (event) => {
-    const commentId = commentDeleteBtn.getAttribute("data-comment-id");
-    console.log(commentId);
-    const url = `/comments/${commentId}`;
-    fetch(url, {
-      method: "DELETE",
-    }).then(response => {
-      if(!response.ok) {
-        alert("댓글 삭제 실패.");
-        return;
-      }
-      alert("댓글 삭제 성공.");
-      window.location.reload();
+  commentDeleteBtns.forEach(btn => {
+    btn.addEventListener("click", function() {
+      const commentId = btn.getAttribute("data-comment-id");
+
+      const url = `/comments/${commentId}`;
+      fetch(url, {
+        method: "DELETE",
+      }).then(response => {
+        if(!response.ok) {
+          alert("댓글 삭제 실패.");
+          return;
+        }
+        alert("댓글 삭제 성공.");
+        window.location.reload();
+      });
     });
   });
 }
