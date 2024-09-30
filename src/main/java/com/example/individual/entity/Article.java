@@ -1,11 +1,8 @@
 package com.example.individual.entity;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import java.time.LocalDateTime;
 
 @Getter // lombok Getter
 @Setter // lombok Setter
@@ -19,9 +16,9 @@ public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column
+    @Column(nullable = false)
     private String title;
-    @Column
+    @Column(nullable = false)
     private String content;
 
     public void patch(Article article) {

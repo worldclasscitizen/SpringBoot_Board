@@ -19,9 +19,9 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name="article_id")
     private Article article;
-    @Column
+    @Column(nullable = false)
     private String nickname;
-    @Column
+    @Column(nullable = false)
     private String body;
 
     public static Comment createComment(Article article, CommentDto dto) {

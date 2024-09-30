@@ -19,8 +19,8 @@
 
     <!-- Comments List -->
     <div th:each="comment, iterStat : ${commentDtos}" class="comment-item d-flex" style="display: flex; align-items: center; margin-bottom: 0px;">
-      <p class="nickname" th:text="${comment.nickname}" style="width: 150px; text-align: left; margin-right: 10px;">댓글 작성자</p>
-      <p class="comment-body" th:text="${comment.body}" style="flex-grow: 1; text-align: left;">댓글 내용</p>
+      <p class="nickname" id="nickname-${comment.id}" th:text="${comment.nickname}" style="width: 150px; text-align: left; margin-right: 10px;">댓글 작성자</p>
+      <p class="comment-body" id="body-${comment.id}" th:text="${comment.body}" style="flex-grow: 1; text-align: left;">댓글 내용</p>
 
       <!-- Bootstrap's Dropdown -->
       <div class="dropdown" style="position: relative; align-self: flex-start; margin-right: 1.5%; margin-top: -10px;">
